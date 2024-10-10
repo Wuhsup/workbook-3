@@ -13,7 +13,7 @@ public class FormatDates {
         DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         DateTimeFormatter fmt2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter fmt3 = DateTimeFormatter.ofPattern("MMMM d, yyyy");
-        DateTimeFormatter fmt4 = DateTimeFormatter.ofPattern("E, MMM d, yyyy HH:mm 'GMT'");
+        DateTimeFormatter fmt4 = DateTimeFormatter.ofPattern("E, MMM d, yyyy hh:mm 'GMT'");
 
         System.out.println(today.format(fmt1));
         System.out.println(today.format(fmt2));
