@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class PayrollCalculator {
     public static void main(String[] args) throws IOException {
-        String filePath = "./src/main/resources/dataFiles/employees.csv";
+        //String filePath = "./src/main/resources/dataFiles/employees.csv";
 
         FileReader fileReader = new FileReader("./src/main/resources/employees.csv");
         BufferedReader bufReader = new BufferedReader(fileReader);

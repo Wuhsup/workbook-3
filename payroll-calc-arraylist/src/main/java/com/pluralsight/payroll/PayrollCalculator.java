@@ -11,7 +11,7 @@ public class PayrollCalculator {
 
 
     public static void main(String[] args) throws IOException {
-        String filePath = "./src/main/resources/dataFiles/employees.csv";
+        //String filePath = "./src/main/resources/dataFiles/employees.csv";
     try {
 
         FileReader fileReader = new FileReader("./src/main/resources/employees.csv");
