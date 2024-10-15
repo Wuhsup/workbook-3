@@ -30,7 +30,7 @@ public class OnlineStore {
                 ));
             }
         } catch (IOException e) {
-            System.out.println("Error loading inventory: " + e.getMessage());
+            System.out.println("Error occured: Please try again: " + e.getMessage());
         }
     }
 
@@ -40,9 +40,9 @@ public class OnlineStore {
             int choice = getUserChoice(3);
             switch (choice) {
                 case 1 -> displayProducts();
-                case 2 -> displayCart();
+                case 2 -> displayBag();
                 case 3 -> {
-                    System.out.println("Thank you for shopping with us!");
+                    System.out.println("All set! Thank you for shopping! ");
                     return;
                 }
             }
@@ -50,7 +50,7 @@ public class OnlineStore {
     }
 
     private void displayHomeScreen() {
-        System.out.println("\n--- Online Store Home ---\n1. Display Products\n2. Display Cart\n3. Exit\nEnter your choice: ");
+        System.out.println("--- World Of Thing Online Store ---\n1. Show me the products!\n2. What's in your bag?\n3. Leave :/\nEnter your choice: ");
     }
 
     private int getUserChoice(int maxChoice) {
@@ -59,7 +59,7 @@ public class OnlineStore {
                 int choice = Integer.parseInt(scanner.nextLine());
                 if (choice > 0 && choice < maxChoice) return choice;
             } catch (NumberFormatException ignored) {}
-            System.out.print("Invalid choice. Please try again: ");
+            System.out.print("Uh oh, something went wrong. Please try again: ");
         }
     }
 
@@ -87,7 +87,7 @@ public class OnlineStore {
     }
 
     private void addToCart() {
-        System.out.print("Enter product ID to add to cart: ");
+        System.out.print("Enter product code: ");
         try {
             int id = Integer.parseInt(scanner.nextLine());
             item.stream()
@@ -95,17 +95,17 @@ public class OnlineStore {
                     .findFirst()
                     .ifPresentOrElse(product -> {
                         cart.addProduct(product);
-                        System.out.println("Product added to cart.");
-                    }, () -> System.out.println("Product not found."));
+                        System.out.println("Score! Item added to cart.");
+                    }, () -> System.out.println("Uh oh, product not found."));
         } catch (NumberFormatException e) {
-            System.out.println("Invalid ID format.");
+            System.out.println("Oops, wrong ID format.");
         }
     }
 
-    private void displayCart() {
-        System.out.println("\n--- Your Shopping Cart ---");
+    private void displayBag() {
+        System.out.println("--- My Bag ---");
         cart.displayCart();
-        System.out.println("\n1. Check Out\n2. Remove Product\n3. Go Back\nEnter your choice: ");
+        System.out.println("\n1. Ready to Check Out! \n2. Mmm, Remove from Bag\n3. Go back\nEnter your choice: ");
 
         switch (getUserChoice(3)) {
             case 1 -> checkOut();
@@ -114,17 +114,17 @@ public class OnlineStore {
     }
 
     private void checkOut() {
-        System.out.printf("Thank you for your purchase! Total: $%.2f%n", cart.getTotalAmount());
+        System.out.printf("Ca-Ching! Thanks for your order! Total: $%.2f%n", cart.getTotalAmount());
         cart.clear();
     }
 
     private void removeFromCart() {
-        System.out.print("Enter product ID to remove from cart: ");
+        System.out.print("Have a change of heart? Just enter the product ID to remove from cart: ");
         try {
             String id = (scanner.nextLine());
             cart.removeProduct(id);
         } catch (NumberFormatException e) {
-            System.out.println("Invalid ID format.");
+            System.out.println("Oops, wrong ID format.");
         }
     }
 
