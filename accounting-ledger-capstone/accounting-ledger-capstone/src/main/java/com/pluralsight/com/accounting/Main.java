@@ -184,6 +184,7 @@ public class Main {
         }
     }
 
+    // Manages the report screen for user selection
     private static void runReportScreen() {
         boolean inReports = true;
         while (inReports) {

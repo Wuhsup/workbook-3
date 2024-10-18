@@ -23,7 +23,7 @@ public class Transaction {
         this.description = description;
     }
 
-
+    // Getters
     public LocalDate getDate() {
         return date;
     }
