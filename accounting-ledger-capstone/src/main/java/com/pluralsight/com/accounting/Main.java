@@ -21,7 +21,7 @@ public class Main {
 
     System.out.println(Transaction.getTime());
         loadTransactions();
-        run(); //call run method to start the app
+        run(); //Call run method to start the app
     }
 
     // Loads transactions from a CSV file into the transactions list
@@ -30,12 +30,12 @@ public class Main {
             reader.readLine(); // Skip header line
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\|"); // Split the CSV line into parts
-                LocalDate date = LocalDate.parse(parts[0].trim());
-                LocalTime time = LocalTime.parse(parts[1].trim());
+                String[] part = line.split("\\|"); // Split the CSV line into part
+                LocalDate date = LocalDate.parse(part[0].trim());
+                LocalTime time = LocalTime.parse(part[1].trim());
                 // Parse the date
                 // Add new Transaction to the list
-                transactions.add(new Transaction(date, time, parts[2], Double.parseDouble(parts[3]), parts[4]));
+                transactions.add(new Transaction(date, time, part[2], Double.parseDouble(part[3]), part[4]));
             }
         } catch (IOException e) {
             System.out.println("No existing transactions file found. Starting with an empty ledger.");
@@ -45,14 +45,14 @@ public class Main {
     // Saves all transactions back to the CSV file
     private static void saveTransactions() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILENAME))) {
-            writer.write("Date  |  Time  |  Type  |  Amount  |  Description  "); // Write header
+            writer.write("Date  |  Time  |  Vendor  |  Amount  |  Description  "); // Write header
             writer.newLine(); // Move to the next line
             for (Transaction t : transactions) {
                 writer.write(t.toString()); // Write each transaction
                 writer.newLine(); // Move to the next line
             }
         } catch (IOException e) {
-            System.out.println("Error saving transactions: " + e.getMessage());
+            System.out.println("Ruh Roh.saving transactions: " + e.getMessage());
         }
     }
 
@@ -65,9 +65,9 @@ public class Main {
     // Displays transactions, filtered by type if specified
     public static void displayTransactions(String filterType) {
         for (Transaction t : transactions) {
-            if (filterType == null || t.getType().equals(filterType)) {
+            if (filterType == null || t.getVendor().equals(filterType)) {
                 System.out.printf("%s | %s | $%.2f | %s%n",
-                        t.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE), t.getType(), t.getAmount(), t.getDescription());
+                        t.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE), t.getVendor(), t.getAmount(), t.getDescription());
             }
         }
     }
@@ -89,7 +89,7 @@ public class Main {
         // Display transactions within the date range
         for (Transaction t : transactions) {
             if ((startDate == null || !t.getDate().isBefore(startDate)) && !t.getDate().isAfter(endDate)) {
-                System.out.printf("%s | %s | $%.2f | %s%n", t.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE), t.getType(), t.getAmount(), t.getDescription());
+                System.out.printf("%s | %s | $%.2f | %s%n", t.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE), t.getVendor(), t.getAmount(), t.getDescription());
             }
         }
     }
@@ -98,7 +98,7 @@ public class Main {
     public static void searchByVendor(String vendor) {
         transactions.stream() // Allowing you to perform operations (like list) chained together to transform data in a more clear way.
                 .filter(t -> t.getDescription().toLowerCase().contains(vendor.toLowerCase())) // Case insensitive search
-                .forEach(t -> System.out.printf("%s | %s | $%.2f | %s%n", t.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE), t.getType(), t.getAmount(), t.getDescription()));
+                .forEach(t -> System.out.printf("%s | %s | $%.2f | %s%n", t.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE), t.getVendor(), t.getAmount(), t.getDescription()));
     }
 
     // Main application loop for user interaction
@@ -119,7 +119,7 @@ public class Main {
                 case "P": handleTransaction("Payment"); break; // Handle payment
                 case "L": runLedgerScreen(); break; // Open ledger screen
                 case "X": System.out.println("Exiting application. Goodbye!"); running = false; break; // Exit
-                default: System.out.println("Invalid choice. Please try again."); // Invalid input
+                default: System.out.println("Ruh Roh! Please try again."); // Invalid input
             }
         }
     }
@@ -153,7 +153,7 @@ public class Main {
                 case "P": displayTransactions("Payment"); break; // Display only payments
                 case "R": runReportScreen(); break; // Open report screen
                 case "H": inLedger = false; break; // Go back to home
-                default: System.out.println("Invalid choice. Please try again."); // Invalid input
+                default: System.out.println("Ruh Roh! Please try again."); // Invalid input
             }
         }
     }
@@ -182,7 +182,7 @@ public class Main {
                     searchByVendor(scanner.nextLine()); // Search by vendor
                     break;
                 case "0": inReports = false; break; // Go back to ledger
-                default: System.out.println("Invalid choice. Please try again."); // Invalid input
+                default: System.out.println("Ruh Roh! Please try again."); // Invalid input
             }
         }
     }
