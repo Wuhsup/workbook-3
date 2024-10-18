@@ -1,29 +1,11 @@
 package com.pluralsight.com.accounting;
 
-import javax.sound.midi.Soundbank;
 import java.io.*;
-import java.sql.SQLOutput;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-
-//2024-10-16|Payment|-25.0|school books
-//2024-10-16| Payment |-25.0| halloween candy
-//2024-10-16| Deposit |1500.0| tax return
-// 2024-10-16| Deposit |500.0| bingo wins
-//2024-10-16| Payment |-50.0| phone bill
-//2024-10-16| Deposit |150.5| YUU wages
-//2024-10-16| Deposit |20.0| Type C- Adapter
-
-
-
-
-
-
-
 
 
 
@@ -38,16 +20,9 @@ public class Main {
     public static void main(String[] args) {
 
     System.out.println(Transaction.getTime());
-
         loadTransactions();
-      //  new Main().run(); // Create an instance of Main and run the application
-
         run(); //call run method to start the app
     }
-    // Constructor to initialize the application and load existing transactions
-    public Main() {
-
-    } // we do not need a constructor on the main class because we are not creating an onstance of the main
 
     // Loads transactions from a CSV file into the transactions list
     private static void loadTransactions() {
@@ -65,7 +40,6 @@ public class Main {
         } catch (IOException e) {
             System.out.println("No existing transactions file found. Starting with an empty ledger.");
         }
-        //sortTransactions(); // Uncomment to enable sorting of transactions
     }
 
     // Saves all transactions back to the CSV file
@@ -122,7 +96,7 @@ public class Main {
 
     // Searches transactions by vendor name
     public static void searchByVendor(String vendor) {
-        transactions.stream() // Grab and process object in that collection.
+        transactions.stream() // Allowing you to perform operations (like list) chained together to transform data in a more clear way.
                 .filter(t -> t.getDescription().toLowerCase().contains(vendor.toLowerCase())) // Case insensitive search
                 .forEach(t -> System.out.printf("%s | %s | $%.2f | %s%n", t.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE), t.getType(), t.getAmount(), t.getDescription()));
     }
@@ -131,7 +105,7 @@ public class Main {
     public static void run() {
         boolean running = true;
         while (running) {
-            System.out.println("\n--- Home Screen ---");
+            System.out.println("\n--- Home Screen =) ---");
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment (Debit)");
             System.out.println("L) Ledger");
@@ -163,7 +137,7 @@ public class Main {
     private static void runLedgerScreen() {
         boolean inLedger = true;
         while (inLedger) {
-            System.out.println("\n--- Ledger Screen ---");
+            System.out.println("\n--- Ledger Screen =) ---");
             System.out.println("A) All");
             System.out.println("D) Deposits");
             System.out.println("P) Payments");
@@ -187,7 +161,7 @@ public class Main {
     private static void runReportScreen() {
         boolean inReports = true;
         while (inReports) {
-            System.out.println("\n--- Report Screen ---");
+            System.out.println("\n--- Report Screen =) ---");
             System.out.println("1) Month To Date");
             System.out.println("2) Previous Month");
             System.out.println("3) Year To Date");
