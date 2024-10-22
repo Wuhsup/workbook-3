@@ -126,9 +126,9 @@ public class Main {
 
     // Handles the addition of a transaction based on type
     private static void handleTransaction(String type) {
-        System.out.print("Enter amount: ");
+        System.out.print("Enter desired amount");
         double amount = Double.parseDouble(scanner.nextLine()); // Read amount
-        System.out.print("Enter description: ");
+        System.out.print("Enter the descrition");
         String description = scanner.nextLine(); // Read description
         addTransaction(type, type.equals("Payment") ? -amount : amount, description); // Add transaction
     }
